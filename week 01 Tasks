@@ -1,0 +1,112 @@
+Basic_Price = 200.00 # float
+
+Item_Category = ["Case","Case","RAM","RAM","RAM","Main Hard Disk Drive","Main Hard Disk Drive",
+                  "Main Hard Disk Drive","Solid State Drive","Solid State Drive","Second Hard Disk Drive",
+                  "Second Hard Disk Drive","Second Hard Disk Drive","Optical Drive","Optical Drive",
+                  "Operating System","Operating System" ] # String Array
+
+Item_code =   ["A1","A2","B1","B2","B3","C1","C2","C3","D1","D2",
+                "E1","E2","E3","F1","F2","G1","G2"] # String Array
+
+Item_Description =  ["Compact","Tower","8GB","16GB","32GB","1 TB HDD","2 TB HDD","4 TB HDD",
+                    "240 GB SSD","480 GB SSD","1 TB HDD","2 TB HDD","4 TB HDD","DVD/Blu-Ray Player",
+                    "DVD/Blu-Ray Re-writer","Standard Version","Professional Version"]  # String Array
+
+Item_Prices =  [75.00,150.00,79.99,149.99,299.99,49.99,89.99,129.99,59.99,119.99,49.99,89.99,129.99,50.00
+                 ,100.00,100.00,175.00 ]  # Float Array    
+Item_Category_Location = 0 # 0 for Case
+Chosen_item_list = [] # Integar Array
+print(" Price of basic components is 200$" )
+print(" Please select 1 case from the follwoing : " )
+for Case in range (0,2):
+  print("Press "+str(Case)+  "  for::  Item Category : ",Item_Category[Item_Category_Location+Case] , 
+        "| Item Code :" ,Item_code[Item_Category_Location+Case] ,
+        "| Item Description : ", Item_Description[Item_Category_Location+Case] ,"|Item Price :" , Item_Prices[Item_Category_Location+Case])
+
+
+
+Chosen_Item = int(input())
+while (Chosen_Item != 0 and Chosen_Item != 1):
+  print(" Please Press 0 or 1 ")
+  Chosen_Item = int(input())
+
+Chosen_item_list.append(Item_Category_Location + Chosen_Item)
+print(Chosen_item_list)
+
+Item_Category_Location = 2   #2 for RAM
+print(" Please select 1 RAM from the follwoing : " )
+#FOR Case 0 TO 2 DO
+for Case in range (0,3):
+  print("Press " +str(Case)+  "  for::  Item Category : ", Item_Category[Item_Category_Location+Case] , "| Item Code :" ,
+        Item_code[Item_Category_Location+Case] ,
+        "| Item Description : ", Item_Description[Item_Category_Location+Case] ,"|Item Price : $" , Item_Prices[Item_Category_Location+Case])
+Chosen_Item = int(input())
+while(Chosen_Item != 0 and Chosen_Item != 1 and Chosen_Item != 2):
+  print ( " Please Press 0 or 1 or 2 ")
+  Chosen_Item = int(input())
+
+Chosen_item_list.append(Item_Category_Location + Chosen_Item)
+print(Chosen_item_list)
+Item_Category_Location = 5   #2 for HDD
+print(" Please select 1 Main Hard Disk Drive from the follwoing : " )
+for Case in range (0,3):
+  print("Press "+str(Case)+  "  for::  Item Category : ", Item_Category[Item_Category_Location+Case] , "| Item Code :" ,
+        Item_code[Item_Category_Location+Case] ,
+        "| Item Description : ", Item_Description[Item_Category_Location+Case] ,"|Item Price : $" , Item_Prices[Item_Category_Location+Case])
+
+Chosen_Item = int(input())
+while(Chosen_Item != 0 and Chosen_Item != 1 and Chosen_Item != 2):
+  print ( " Please Press 0 or 1 or 2 ")
+  Chosen_Item = int(input())
+
+Chosen_item_list.append(Item_Category_Location + Chosen_Item)
+print(Chosen_item_list)
+##########################TASK 2#############\
+Item_Category_Location = 8
+print(" You can buy following additional items" )
+#Chosen_Item = int(input())
+for Case in range (0,8):
+  print("Press "+str(Case)+  "  for::  Item Category : ", Item_Category[Item_Category_Location+Case] , "| Item Code :" ,
+        Item_code[Item_Category_Location+Case] ,
+        "| Item Description : ", Item_Description[Item_Category_Location+Case] ,"|Item Price : $" , Item_Prices[Item_Category_Location+Case])
+print(" Press -1 to finish shopping")
+
+NumOfAdditionalItems = 0  #int task 3
+while True:
+  Chosen_Item = int(input())
+  while(Chosen_Item != range(0,8) and Chosen_Item != -1  ): #validate input
+    print(" Please enter from following" )
+    for Case in range (0,8):
+      print("Press "+str(Case)+  "  for::  Item Category : ", Item_Category[Item_Category_Location+Case] , "| Item Code :" ,
+            Item_code[Item_Category_Location+Case] ,
+            "| Item Description : ", Item_Description[Item_Category_Location+Case] ,"|Item Price : $" , Item_Prices[Item_Category_Location+Case])
+    print(" Press -1 to finish shopping")
+    Chosen_Item = int(input())
+  if Chosen_Item == -1:
+      break
+  Chosen_item_list.append(Item_Category_Location + Chosen_Item) 
+  NumOfAdditionalItems = NumOfAdditionalItems + 1  #task 3
+print(Chosen_item_list)
+
+############END task 2#########################
+Final_Price = Basic_Price  #Float
+print("You have selected following items with basic components ")
+for Counter in range(0,len(Chosen_item_list)):
+  item=Chosen_item_list[Counter]
+  print("Item Category : ", Item_Category[item] , "| Item Code :" ,Item_code[item] ,
+        "| Item Description : ", Item_Description[item] ,"|Item Price :$" , Item_Prices[item])
+  Final_Price = Final_Price +  Item_Prices[item]
+
+### Calculate discount TASK 3 ###
+DiscountPercent = 0.0  #FLOAT task 3
+if NumOfAdditionalItems > 1 :
+  DiscountPercent= 0.1
+elif NumOfAdditionalItems == 1:
+  DiscountPercent = 0.05 
+Discount = Final_Price * DiscountPercent
+Final_Price = Final_Price - Discount
+if Discount > 0.0: 
+  print(" Money Saved : $",Discount)
+  print("Price After Discount",Final_Price)
+else:  
+ print(" Final Price : $", Final_Price)
