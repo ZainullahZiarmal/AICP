@@ -1,0 +1,59 @@
+
+electricity_matrix = [
+    [80, 150, 250],  
+    [120, 180, 280],  
+    [220, 280, 380]   
+]
+
+student_id = 'XY123456789'
+
+
+def costSlab1():
+    unit_cost_slab1 = 10
+    slab1_units = electricity_matrix[0]  
+    print("Bill for Slab 1 is:", end=' ')
+    for units in slab1_units:
+        cost = units * unit_cost_slab1
+        print(f"{cost} ", end=' ')
+    print()
+
+
+def costSlab2():
+    unit_cost_slab2 = 15
+    slab2_units = electricity_matrix[1]  
+    print("Bill for Slab 2 is:", end=' ')
+    for units in slab2_units:
+        cost = units * unit_cost_slab2
+        print(f"{cost} ", end=' ')
+    print()
+
+
+def costSlab3():
+    unit_cost_slab3 = 20
+    slab3_units = electricity_matrix[2]  
+    print("Bill for Slab 3 is:", end=' ')
+    for units in slab3_units:
+        cost = units * unit_cost_slab3
+        print(f"{cost} ", end=' ')
+    print()
+
+# Main menu
+while True:
+    print("\nStudent ID:", student_id)
+    print("Enter Your Choice !!")
+    print("Press 1 to display bill of Slab 1 and Slab 2")
+    print("Press 2 to display bill of Slab 3")
+    print("Press 3 to  to exit")
+
+    choice = input("Enter your choice: ")
+
+    if choice == '1':
+        costSlab1()
+        costSlab2()
+    elif choice == '2':
+        costSlab3()
+    elif choice == '':
+        print("Exiting the program.")
+        break
+    else:
+        print("Invalid choice. Please enter a valid option.")
