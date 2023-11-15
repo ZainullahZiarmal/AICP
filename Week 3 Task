@@ -52,7 +52,7 @@ while True:
         costSlab2()
     elif choice == '2':
         costSlab3()
-    elif choice == '':
+    elif choice == '3':
         print("Exiting the program.")
         break
     else:
