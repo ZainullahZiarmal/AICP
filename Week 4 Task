@@ -1,0 +1,63 @@
+class Hexagon:
+    def __init__(self):
+        self.s = 0
+
+    def input(self, side):
+        self.s = side
+
+    def calcArea(self):
+        return 1.5 * 1.732 * self.s * self.s
+
+    def calcPeri(self):
+        return 6 * self.s
+
+    def calcAngleSum(self):
+        a = 120
+        return 6 * a
+
+    def display(self):
+        print("Area of Hexagon:", self.calcArea())
+        print("Perimeter of Hexagon:", self.calcPeri())
+        print("Sum of Angles of Hexagon:", self.calcAngleSum())
+
+class Square:
+    def __init__(self):
+        self.s = 0
+
+    def input(self, side):
+        self.s = side
+
+    def calcAreaSquare(self):
+        return self.s * self.s
+
+    def calcPeriSquare(self):
+        return 4 * self.s
+
+    def display(self):
+        print("Area of Square:", self.calcAreaSquare())
+        print("Perimeter of Square:", self.calcPeriSquare())
+
+# Main part
+hex = Hexagon()
+seq = Square()
+
+choice = 0
+CNIC = 7
+side_hex = CNIC
+side_seq = CNIC + 1
+check = True
+
+while check:
+    print("Enter 1 to Calculate area, perimeter, and sum of angles of Hexagon")
+    print("Enter 2 to calculate area and perimeter of Square")
+    print("Press any other key to exit")
+    choice = int(input())
+
+    if choice == 1:
+        hex.input(side_hex)
+        hex.display()
+    elif choice == 2:
+        seq.input(side_seq)
+        seq.display()
+    else:
+        check = False
