@@ -1,0 +1,122 @@
+
+MIN_GRAVEL_WEIGHT = 49.9
+MAX_GRAVEL_WEIGHT = 50.1
+MIN_CEMENT_WEIGHT = 24.9
+MAX_CEMENT_WEIGHT = 25.1
+
+
+COST_CEMENT = 3
+COST_GRAVEL = 2
+COST_SAND = 2
+SPECIAL_PACK_DISCOUNT = 10
+
+def validate_sack(contents, weight):
+    if contents not in ['C', 'G', 'S']:
+        return "Invalid contents. Must be C (cement), G (gravel), or S (sand)."
+    
+    if contents == 'C' and not (MIN_CEMENT_WEIGHT <= weight <=MAX_CEMENT_WEIGHT):
+        return "Invalid weight for cement sack."
+    elif contents == 'G' and not (MIN_GRAVEL_WEIGHT <= weight <= MAX_GRAVEL_WEIGHT):
+        return "Invalid weight for gravel sack."
+    elif contents == 'S' and not (MIN_GRAVEL_WEIGHT <= weight <= MAX_GRAVEL_WEIGHT):
+        return "Invalid weight for sand sack."
+    
+    return None
+
+def task1():
+    print(" Check the contents and weight of a single sack")
+    
+    contents = input("Enter contents (C, G, S): ").upper()
+    weight = float(input("Enter weight (in kilograms): "))
+    
+    validation_result = validate_sack(contents, weight)
+    
+    if validation_result is None:
+        print(f"Sack accepted - Contents: {contents}, Weight: {weight} kg")
+    else:
+        print(f"Sack rejected - Reason: {validation_result}")
+
+
+
+
+
+def task2():
+    print("Check a customer’s order for delivery")
+    
+    num_sacks_cement = int(input("Enter the number of cement sacks for the order: "))
+    num_sacks_gravel = int(input("Enter the number of gravel sacks for the order: "))
+    num_sacks_sand = int(input("Enter the number of sand sacks for the order: "))
+    
+    total_weight = 0
+    num_rejected = 0
+    
+    # Check each sack in the order
+    for i in range(num_sacks_cement):
+        contents = 'C'
+        weight = float(input(f"Enter weight for cement sack {i + 1}: "))
+        validation_result = validate_sack(contents, weight)
+        if validation_result is not None:
+            print(f"Sack rejected - Reason: {validation_result}")
+            num_rejected += 1
+        else:
+            total_weight += weight
+    
+    for i in range(num_sacks_gravel):
+        contents = 'G'
+        weight = float(input(f"Enter weight for gravel sack {i + 1}: "))
+        validation_result = validate_sack(contents, weight)
+        if validation_result is not None:
+            print(f"Sack rejected - Reason: {validation_result}")
+            num_rejected += 1
+        else:
+            total_weight += weight
+    
+    for i in range(num_sacks_sand):
+        contents = 'S'
+        weight = float(input(f"Enter weight for sand sack {i + 1}: "))
+        validation_result = validate_sack(contents, weight)
+        if validation_result is not None:
+            print(f"Sack rejected - Reason: {validation_result}")
+            num_rejected += 1
+        else:
+            total_weight += weight
+    
+    print(f"Total weight of the order: {total_weight} kg")
+    print(f"Number of sacks rejected from the order: {num_rejected}")
+
+def task3():
+    print(" Calculate the price for a customer’s order")
+    
+    num_sacks_cement = int(input("Enter the number of cement sacks for the order: "))
+    num_sacks_gravel = int(input("Enter the number of gravel sacks for the order: "))
+    num_sacks_sand = int(input("Enter the number of sand sacks for the order: "))
+    
+    num_special_packs = min(
+        num_sacks_cement // 1,
+        num_sacks_sand // 2,
+        num_sacks_gravel // 2
+    )
+    
+    regular_price = (
+        num_sacks_cement * COST_CEMENT +
+        num_sacks_gravel * COST_GRAVEL +
+        num_sacks_sand * COST_SAND
+    )
+    
+    special_pack_price = num_special_packs * SPECIAL_PACK_DISCOUNT
+    
+    total_price = regular_price - special_pack_price
+    
+    print(f"Regular price for the order: ${regular_price}")
+    print(f"Number of special packs in the order: {num_special_packs}")
+    
+    if num_special_packs > 0:
+        print(f"New price for the order: ${total_price}")
+        print(f"Amount saved with special packs: ${special_pack_price}")
+    else:
+        print("No special packs in the order. Regular price applies.")
+
+task1()
+task2()
+task3()
+
