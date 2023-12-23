@@ -1,0 +1,58 @@
+CHARITIES = ["Charity A", "Charity B", "Charity C"]
+charity_totals = [0, 0, 0]
+
+def display_charities():
+    print("Choose a charity:")
+    for i, charity in enumerate(CHARITIES, start=1):
+        print(f"{i}. {charity}")
+
+def calculate_donation(bill_amount, charity_choice):
+    donation = 0.01 * bill_amount
+    charity_totals[charity_choice - 1] += donation
+    return donation
+
+def record_donation():
+    display_charities()
+    charity_choice = int(input("Enter the number corresponding to the chosen charity (1, 2, 3): "))
+    
+    if charity_choice not in [1, 2, 3]:
+        print("Invalid choice. Please choose 1, 2, or 3.")
+        return
+    
+    bill_amount = float(input("Enter the shopping bill amount: $"))
+    donation = calculate_donation(bill_amount, charity_choice)
+    print(f"Donation to {CHARITIES[charity_choice - 1]}: ${donation:.2f}")
+
+def show_totals():
+    print("\nCharity Totals:")
+    sorted_charities = sorted(zip(CHARITIES, charity_totals), key=lambda x: x[1], reverse=True)
+    for charity, total in sorted_charities:
+        print(f"{charity}: ${total:.2f}")
+    grand_total = sum(charity_totals)
+    print(f"\nGRAND TOTAL DONATED TO CHARITY: ${grand_total:.2f}")
+
+def main():
+    print("Welcome to the Charity Donation System")
+
+    # Task 1
+    print("\nTASK 1: Set up the donation system")
+    for i in range(3):
+        CHARITIES[i] = input(f"Enter the name of Charity {i + 1}: ")
+
+    # Task 2 and Task 3
+    while True:
+        print("\nTASK 2: Record each donation")
+        print("TASK 3: Show the totals so far")
+        choice = int(input("Enter your choice (2 for donation, 3 to show totals, -1 to exit): "))
+
+        if choice == -1:
+            break
+        elif choice == 2:
+            record_donation()
+        elif choice == 3:
+            show_totals()
+        else:
+            print("Invalid choice. Please choose 2, 3, or -1.")
+
+if __name__ == "__main__":
+    main()
